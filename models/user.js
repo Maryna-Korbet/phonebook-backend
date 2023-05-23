@@ -11,7 +11,7 @@ const subscriptionList = ["starter", "pro", "business"]
 const userSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, 'Name is required'],
     },
     email: {
         type: String,

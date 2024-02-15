@@ -1,11 +1,11 @@
-const {Schema, model} = require('mongoose')
+const {Schema, model} = require ('mongoose')
 const Joi = require('joi')
 
 const {handleMongooseError} = require("../helpers")
 
-const nameRegex = /^[a-zA-Z\u0410-\u044F\u0401\u0451]+(([' -][a-zA-Z\u0410-\u044F\u0401\u0451 ])?[a-zA-Z\u0410-\u044F\u0401\u0451]*)*$/
+const nameRegex = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/
 const emailMinDomainSegments = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/
+const phonePattern = /\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}/
 
 const contactSchema = new Schema({
     name: {

@@ -1,0 +1,270 @@
+openapi: 3.0.0
+info:
+  title: Phonebook API
+  version: 1.0.0
+  description: API for creating, editing and deleting contact data
+servers:
+  - url: http://localhost:5000/api
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        subscription:
+          type: string
+        token:
+          type: string
+        avatarURL:
+          type: string
+        verify:
+          type: boolean
+        verificationToken:
+          type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        favorite:
+          type: boolean
+        owner:
+          type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "409":
+          description: Email already in use
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/login:
+    post:
+      summary: Login a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: User logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        "401":
+          description: Email or password is wrong
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/verify/{verificationToken}:
+    get:
+      summary: Verify user's email
+      parameters:
+        - name: verificationToken
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Email verified successfully
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/verify:
+    post:
+      summary: Resend verification email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Verification email sent
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /auth/logout:
+    post:
+      summary: Logout a user
+      responses:
+        "200":
+          description: User logged out successfully
+  /auth/current:
+    get:
+      summary: Get current user
+      responses:
+        "200":
+          description: Current user information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /contacts:
+    get:
+      summary: Get all contacts
+      responses:
+        "200":
+          description: A list of contacts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Contact"
+    post:
+      summary: Add a new contact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "201":
+          description: Contact added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+  /contacts/{contactId}:
+    get:
+      summary: Get a contact by ID
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Contact found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "404":
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Update a contact by ID
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
+      responses:
+        "200":
+          description: Contact updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
+        "404":
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Delete a contact by ID
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Contact deleted successfully
+        "404":
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /contacts/{contactId}/favorite:
+    patch:
+      summary: Update the favorite status of a contact
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                favorite:
+                  type: boolean
+      responses:
+        "200":
+          description: Contact favorite status updated successfully
+        "404":
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"

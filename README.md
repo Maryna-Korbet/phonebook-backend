@@ -1,43 +1,67 @@
+<h1 align="center">Phonebook backend</h1>
 
-<h1 align="center">Phonebook Backend</h1>
+This is the backend application for
+[Phonebook App](https://maryna-korbet.github.io/phonebook/), a
+website for creating, editing and deleting contact data.
 
-<p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/Maryna-Korbet/phonebook-backend?color=56BEB8">
+## Technologies
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/Maryna-Korbet/phonebook-backend?color=56BEB8">
+- **Node.js**
+- **express**
+- **mongoose**
+- **swagger-ui-express**
+- **bcrypt**
+- **dotenv**
+- **@sendgrid/mail**
+- **cors**
+- **cors-env**
+- **jimp**
+- **joi**
+- **jsonwebtoken**
+- **morgan**
+- **multer**
+- **gravatar**
+- **nanoid**
+- **yamljs**
+- **nodemon**
 
-</p>
+## Installation
 
-<br>
+1. Clone the repository from GitHub:
+   `git clone https://github.com/Maryna-Korbet/phonebook-backend`
 
-## :dart: About ##
+2. Navigate to the project directory: `cd phonebook-backend`
 
-Ифслутв for [the simple phone book](https://github.com/Maryna-Korbet/phonebook-frontend) that adds implementation of registration,
-login, user updates, redirects, and working with collection of protected data.
+3. Install the dependencies: `yarn`
 
-## :rocket: Technologies ##
+4. Configure environment variables by creating a .env file in the root of the
+   project and providing the necessary values. Refer to the .env.example file
+   for the required variables.
 
-The following tools were used in this project:
+5. Start the development server: `yarn start:dev`
 
-- [Node.js](https://nodejs.org/en)
+6. This will start the backend server on the specified port (default is 5000)
+   and establish a connection to the MongoDB database.
 
-## :white_check_mark: Requirements ##
+7. Access the backend APIs using the base URL `http://localhost:5000` (or the
+   specified port).
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) installed.
+## Swagger documentation
 
-## :checkered_flag: Starting ##
+Documentation is available at `http://localhost:5000/api/docs/`
 
-```bash
-# Clone this project
-$ git clone https://github.com/Maryna-Korbet/phonebook-backend
+<div align="center"> 
+  <img src="./public/images/swagger.png" alt="Swagger documentation" width=100%/>
 
-# Access
-$ cd phonebook-backend
+&#xa0;
 
-# Install dependencies
-$ yarn 
+</div>
 
-# Run the project
-$ yarn start:dev
+## Get in Touch
 
+If you have any questions or suggestions, please feel free to reach out to me through one of the following channels:
 
+- **Email:** [korbet.maryna.developer@gmail.com](mailto:korbet.maryna.developer@gmail.com)
+- **LinkedIn:** [Maryna Korbet](www.linkedin.com/in/maryna-korbet)
+
+I am always happy to connect and chat!
